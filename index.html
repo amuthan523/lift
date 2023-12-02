@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Lift_animation</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      .container {
+        display: flex;
+        height: 100dvh;
+        background: rgba(196, 237, 239, 0.692);
+        align-items: center;
+        justify-content: space-evenly;
+      }
+      .lift_buttons button {
+        cursor: pointer;
+        font-size: 20px;
+        padding: 15px;
+        border: none;
+        border-radius: 8px;
+        background: rgb(128, 88, 193);
+        background: linear-gradient(
+          58deg,
+          rgba(128, 88, 193, 1) 49%,
+          rgba(0, 212, 255, 0) 99%
+        );
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -ms-border-radius: 8px;
+        -o-border-radius: 8px;
+      }
+      .lift_buttons {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .lift {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        background: rgb(88, 193, 186);
+        background: linear-gradient(
+          -90deg,
+          rgba(88, 193, 186, 1) 12%,
+          rgba(0, 212, 255, 0) 100%
+        );
+      }
+      .inner_lift {
+        position: absolute;
+        bottom: 0;
+        width: 200px;
+        height: 150px;
+        background: rgb(202, 203, 157);
+        background: linear-gradient(
+          0deg,
+          rgba(202, 203, 157, 1) 12%,
+          rgba(237, 217, 150, 0.5018382352941176) 100%
+        );
+        z-index: 22;
+        transition: transform 3s ease-in-out;
+        -webkit-transition: transform 3s ease-in-out;
+        -moz-transition: transform 3s ease-in-out;
+        -ms-transition: transform 3s ease-in-out;
+        -o-transition: transform 3s ease-in-out;
+      }
+      .lift_back {
+        position: fixed;
+        background: #ffffffa3;
+        height: 100%;
+        width: 200px;
+      }
+      .floor {
+        position: absolute;
+        /* display: unset; */
+        height: 100%;
+        display: grid;
+        align-items: center;
+      }
+      .floor p {
+        font-size: 20px;
+        color: red;
+        z-index: 22222222;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="lift_buttons">
+        <button class="ground_floor">G</button>
+        <button class="floor_one">1</button>
+        <button class="floor_two">2</button>
+        <button class="floor_three">3</button>
+        <button class="floor_four">4</button>
+      </div>
+      <div class="lift">
+        <div class="floor">
+          <p>4</p>
+          <p>3</p>
+          <p>2</p>
+          <p>1</p>
+          <p>G</p>
+        </div>
+        <div class="lift_back"></div>
+        <div class="inner_lift"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    var lift = document.querySelector(".inner_lift");
+    var floorButtons = document.querySelectorAll(".lift_buttons button");
+    var currentFloor = 0;
+    var liftHeight = 20;
+    for (let i = 0; i < floorButtons.length; i++) {
+      console.log(floorButtons);
+      floorButtons[i].addEventListener("click", () => {
+        var clickedFloor = i;
+        currentFloor = clickedFloor;
+        lift.style.transform = `translateY(-${currentFloor * liftHeight}vh)`;
+      });
+    }
+  </script>
+</html>
